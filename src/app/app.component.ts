@@ -77,22 +77,33 @@ export class AppComponent implements OnInit{
   }
 
   moveRight() {
-    console.log(this.leftTable.getSelectedRowIndexes());
     const selectedIndexes: number[] = this.leftTable.getSelectedRowIndexes();
+    selectedIndexes.sort().reverse();
     if (selectedIndexes.length > 0) {
-      this.rightData.push(...this.data.splice(selectedIndexes[0], 1));
+      selectedIndexes.forEach((i) => {
+        this.rightData.push(...this.data.splice(i, 1));
+      });
       this.leftTable.refresh();
       this.rightTable.refresh();
-      console.log('rightData>>', this.rightData);
     }
   }
   moveLeft() {
-    console.log(this.rightTable.getSelectedRowIndexes());
     const selectedIndexes: number[] = this.rightTable.getSelectedRowIndexes();
+    selectedIndexes.sort().reverse();
     if (selectedIndexes.length > 0) {
-      this.data.push(...this.rightData.splice(selectedIndexes[0], 1));
+      selectedIndexes.forEach((i) => {
+        this.data.push(...this.rightData.splice(i, 1));
+      })
       this.leftTable.refresh();
       this.rightTable.refresh();
+    }
+  }
+
+  toggleIcon(data: any) {
+    if (data.customerID !== 1) {
+      data.customerID = 1;
+    } else {
+      data.customerID = 0;
     }
   }
 }
