@@ -1,6 +1,8 @@
 <div class="main">
   <div>
-    <ejs-grid [dataSource]='data' #leftTable id="leftGrid" [allowRowDragAndDrop]='true' [rowDropSettings]='rowDropOptions'>
+    <ejs-grid [dataSource]='data' #leftTable id="leftGrid"
+      [allowRowDragAndDrop]='true' [rowDropSettings]='rowDropOptions'
+      [selectionSettings]='selectionOptions' (rowDrop)="rowDropOnRight($event)">
       <e-columns>
         <e-column type='checkbox' width='50'></e-column>
         <e-column field='orderID' headerText='Order ID' textAlign='Right' width=90></e-column>
@@ -15,7 +17,8 @@
     <button (click)="moveLeft()"><</button>
   </div>
   <div>
-    <ejs-grid [dataSource]='rightData' #rightTable  id="rightGrid" [allowRowDragAndDrop]='true' [rowDropSettings]='destRowDropOptions'>
+    <ejs-grid [dataSource]='rightData' #rightTable  id="rightGrid" [allowRowDragAndDrop]='true' [rowDropSettings]='destRowDropOptions'
+      [selectionSettings]='selectionOptions' (rowDrop)="rowDropOnLeft($event)">
       <e-columns>
         <e-column type='checkbox' width='50'></e-column>
         <e-column field='orderID' headerText='Order ID' textAlign='Right' width=90></e-column>
